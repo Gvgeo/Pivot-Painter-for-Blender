@@ -1,64 +1,82 @@
 # Pivot Painter for Blender
 
-Pivot Painter is a Blender addon to create a 3d model, for use with Pivot Painter Tool's shaders in Unreal Engine 4
+Pivot Painter is a Blender addon to create a 3d model, for use with Pivot Painter Tool's shaders in Unreal Engine 4.
 
-## Getting Started
+The addon tries to mimic the basic function of the 3dsmaxscript that is based on, while missing many tools that would speed up the creation of a final mesh. As such the resulting mesh and texture, should be fully compatible with the build in material functions of the Pivot Painter Tool 2 shader. Therefore should refer to unreal engine documentation for [Pivot Painter Tool 2.0](https://docs.unrealengine.com/en-us/Engine/Content/Tools/PivotPainter)
 
-The addon tries to mimic the basic funtion of the 3dsmaxscript that is based on, while missing many tools that would speed up the creation of a final mesh. As such the resulting mesh and texture, should be fully compatible with the build in material functions of the Pivot Painter Tool 2 shader. Therefore should refer to unreal engine documentation for [Pivot Painter Tool 2.0](https://docs.unrealengine.com/en-us/Engine/Content/Tools/PivotPainter)
+Despite the name the addon does not make use of vertex paint that was used in Pivot Painter Tool 1, but should be possible to recreate all the examples from the pivot point 1 map in the ContentExamples.
 
-The main order of operations is:
-* duplication of the selected objects
-* Creation of the textures
-* join of the duplicate objects to a final mesh
+The basic functionality of the pivot painter comes from the textures where the info gets stored. One UV layer is set to point each object to the specific pixel with their info.
 
-### Installing
+### Getting Started
 
-* Download Zip file
-* open up Blender
-* go to: File -> User Preferences -> Addons -> Install Add-on from File...
-* select the ZIP you downloaded and click install from file
-* activate the addon from user preferences
+* Study the ContentExamples.
+* Install the addon.
+* See the example blend file.
+* Find what textures the example you want to recreate needs. The names in the addon are the same with the documentation in UE4(filenames differ). The Content Example uses different names.
+* Set the blender scene units on centimeters.
+* Create the mesh in separate parts.
+* Depending on the texture set origin point, parent, selection order.
+* Select all the objects and create the textures.
+* Apply scale in the meshes if needed and export the meshes and the textures.
+* In UE4 when you import the mesh enable Combine Meshes. See [UE4 documentation](https://docs.unrealengine.com/en-US/Engine/Content/Tools/PivotPainter/PivotPainter2#importingassets) for guide with images, ignore the optional step.
+* For the textures set filter Nearest. If the texture is png also set compression VectorDisplacementMap and deselect sRGB.
+* Combine textures, materials and mesh.
 
 ### Prerequisites
 
-The addon to work, needs all the parts of the mesh to be seperate objects, and necessary settings configed depending of the texture selection.
+The addon to work, needs all the parts of the mesh to be separate objects, and necessary settings configured depending of the texture selection.
 
 E.g. to create a tree you need to set prior the parent of each object and the origin point,  while to recreate the house(from the content examples) you need to set the selection order.
 
 ### Examples
-A .blend file is included with two examles.
-Both examples need 2 Textures.
 
-The Tree from cubes needs:
-* Pivot point HDR and Index HDR
-* X Axis and X extent
+A .blend file is included with 4 examples for Pivot Painter already configured in different scenes.
+The examples shows how to recreate the 3 basic demo at content examples of UE4
 
-The House on layer 2 needs:
-* X Axis and Random (8bit not HDR)
-* Pivot Point HDR and Selection Order(Custom)
+* Cube Tree is for foliage animation
+* Grow Tree is for hierarchical scale and a small demonstration to merge levels to create foliage animation
+* House is for object build
+* Strange Tree was used for stress test.
 
-Select all the objects of the mesh you want to create and press Create Texture.
-
-See info on Create Texture button for save format.
-
-Use the mesh and textures to see the result in Unreal Engine.
+The zip file contain a UE4 project with the examples.
+Short Video with the results [here](https://youtu.be/63wU-zAbpNM)
 
 ## Considerations
-Because the tool requires separate objects to work, in complex meshes the number of meshes can be heavily impact the performance of the Blender UI.
+The Save Textures to folder will overwrite if an other texture file has the same name.
+Because the tool requires separate objects to work, in complex meshes the number of meshes can heavily impact the performance of the Blender UI.
 
-## Current State
-While the tool can already be used to create the desired effect, it is mainly untested and problems or inaccuracies may occur. 
-Also... expect crashes.
+## Version
+Currently the next update planned is for blender 2.80, after the beta version has been released. And bug fixes, if any gets reported.
+
+version 0.9
+- add selection order
+- add option to save textures to files
+- add merging of levels
+- add number of textures selection, up to 4
+- add more checks to minimize errors 
+- update the .blend file with more examples
+- add UE4 project with the examples results
+- fixed X Axis calculation from bound box
+- fixed texture creation, when there are more than 256 objects
+- improved UI
+- corrected typo in licence version
+
+version 0.7
+- initial release
+
+### Repository Link
+https://github.com/Gvgeo/Pivot-Painter-for-Blender
 
 ## Author
 
- *George Vogiatzis*
+ *George Vogiatzis (Gvgeo)*
 
 ## License
 
-This project is Licensed under the EUPL- see the [LICENSE.txt](LICENSE.txt) file for details
+This project is Licensed under the EUPL, see the [LICENSE.txt](LICENSE.txt) file for details.
 
 ## Acknowledgment
 
-* This addon is based on the 3dsMaxScript Pivot Painter version 2.0 written by Jonathan Lindquist at Epic Games
+* This addon is based on the 3dsMaxScript Pivot Painter version 2.0 written by Jonathan Lindquist at Epic Games.
 
