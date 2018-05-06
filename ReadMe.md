@@ -32,18 +32,13 @@ E.g. to create a tree you need to set prior the parent of each object and the or
 ### Examples
 
 A .blend file is included with 4 examples for Pivot Painter already configured in different scenes.
-The examples shows how to recreate the 3 basic demo at content examples of UE4
-
-* Cube Tree is for foliage animation
-* Grow Tree is for hierarchical scale and a small demonstration to merge levels to create foliage animation
-* House is for object build
-* Strange Tree was used for stress test.
-
+The examples shows how to recreate the 3 basic demo at content examples of UE4.
 The zip file contain a UE4 project with the examples.
-Short Video with the results [here](https://youtu.be/63wU-zAbpNM)
+Short Video with the results [here](https://youtu.be/63wU-zAbpNM).
 
 ## Considerations
 The Save Textures to folder will overwrite if an other texture file has the same name.
+
 Because the tool requires separate objects to work, in complex meshes the number of meshes can heavily impact the performance of the Blender UI.
 
 ## Version
