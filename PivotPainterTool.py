@@ -885,8 +885,8 @@ class UE4_CreateTexturesOperator(Operator):																	# The button to crea
 			return {'CANCELLED'}
 		else:
 			main(context)
-			print('Pivot Painter Done, total time: ', time.time() - t1)
 			print('Blender GUI may take a moment to respond')
+			self.report({'INFO'}, "Pivot Painter Done, total time: "+ str(time.time() - t1))
 			return {'FINISHED'}
 
 
