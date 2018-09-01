@@ -14,8 +14,8 @@
 bl_info = {
     "name": "Pivot Painter",
     "author": "George Vogiatzis (Gvgeo)",
-    "version": (0, 9),
-    "blender": (2, 79, 0),
+    "version": (0, 9, 2),
+    # "blender": (2, 80, 0),
     "location": "View3D > Tool Shelf > Unreal Tools",
     "description": "Tools to create 3d model for Unreal Engine 4, that make use of the Pivot Painter Tool's material functions",
     "warning": "Untested",
@@ -492,7 +492,7 @@ def pivotarray(pp, obj, counter, size, pixels, hdr): 														# Pivot point
 	rgbvalues = [ r, g, b, ]
 	return rgbvalues
 
-	
+
 def boundboxAxis(pp, obj, counter, size, pixels, hdr):														# Estimates the X vector from the origin point and boundbox vertices. Works only when object has zero rotation.
 	bbvv=[None for x in range(8)]
 	bbLength=[None for x in range(8)]	
@@ -509,7 +509,7 @@ def boundboxAxis(pp, obj, counter, size, pixels, hdr):														# Estimates 
 	
 	fvidlist = []
 	for i in range(8):																						# Check if other vertex have roughly the same distance
-		if bbLength[i] >= ( bbLength[highestVertexId] * pp.percentagefreedom / 100 ):			# Give a small range to include similar distances, Blender inconsistencies(from floating values?) and users input
+		if bbLength[i] >= ( bbLength[highestVertexId] * pp.percentagefreedom / 100 ):			# Give a small range to include points with similar distances from the origin point, Blender inconsistencies(from floating values?) and users input
 			fvidlist.append(i)
 
 	# Get an average position
@@ -595,43 +595,43 @@ def zextent(pp, obj, counter, size, pixels, hdr):															# Z Extent, the 
 class UE4_PivotPainterProperties(PropertyGroup):															# create property group for user options
 	
 	alpha_options = [
-		("Index", "HDR - Parent Index", 'The index number of each part.\nHDR texture needs to be saved as OpenEXR Float(Half).'),
-		("Steps", "HDR - Number of Steps From Root", 'The level in the hierarchy.'),
-		("Randomhdr", "HDR - Random 0-1 Value Per Element", 'Creates a random number per object.'),
-		("Diameter", "HDR - Bounding Box Diameter", 'The length of the diagonal of the bound box before scale.'),
-		("SelectionOrder", "HDR - Selection Order", 'First create selection order from the extra options.\nAfter you create the order, you can change it.\nYou can also set more objects on the same number,\nor skip numbers to create empty time in the animation.'),
-		("Hierarchyhdr", "HDR - Normalized 0-1 Hierarchy Position", 'Object number/ Total nubmer of objects.'),
-		("Xwidth", "HDR - Object X Width", 'The extent of each object on its local X axis.\nValue source is the X Dimension.'),
-		("Ydepth", "HDR - Object Y Depth", 'The extent of each object on its local Y axis.\nValue source is the Y Dimension.'),
-		("Zheight", "HDR - Object Z Height", 'The extent of each object on its local Z axis.\nValue source is the Z Dimension.'),
-		("Hierarchy", "Normalized 0-1 Hierarchy Position", 'Object number/ Total nubmer of objects.'),
-		("Random", "Random 0-1 Value Per Element", 'Creates a random number per object.'),
-		("Xextent", "X extent", 'The extent of each object on its local X axis.\nValue source is the X Dimension.\nValues between 8-2048 in increments of 8.'),
-		("Yextent", "Y extent", 'The extent of each object on its local Y axis.\nValue source is the Y Dimension.\nValues between 8-2048 in increments of 8.'),
-		("Zextent", "Z extent", 'The extent of each object on its local Z axis.\nValue source is the Z Dimension.\nValues between 8-2048 in increments of 8.'),
-		("Diameterscaledhdr", "HDR - Scaled Bounding Box Diameter", 'The length of the diagonal of the bound box WITH scale taken into calculation.'),
-		("Diameterscaled", "Scaled Bounding Box Diameter", 'The length of the diagonal of the bound box WITH scale taken into calculation\nValues between 8-2048 in increments of 8.'),
+		("Index", "HDR - Parent Index", 'The index number of each part.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Steps", "HDR - Number of Steps From Root", 'The level in the hierarchy.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Randomhdr", "HDR - Random 0-1 Value Per Element", 'Creates a random number per object.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Diameter", "HDR - Bounding Box Diameter", 'The length of the diagonal of the bound box before scale.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("SelectionOrder", "HDR - Selection Order", 'First create selection order from the extra options.\nAfter you create the order, you can change it.\nYou can also set more objects on the same number,\nor skip numbers to create empty time in the animation.\n\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Hierarchyhdr", "HDR - Normalized 0-1 Hierarchy Position", 'Object number/ Total nubmer of objects.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Xwidth", "HDR - Object X Width", 'The extent of each object on its local X axis.\nValue source is the X Dimension.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Ydepth", "HDR - Object Y Depth", 'The extent of each object on its local Y axis.\nValue source is the Y Dimension.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Zheight", "HDR - Object Z Height", 'The extent of each object on its local Z axis.\nValue source is the Z Dimension.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Hierarchy", "Normalized 0-1 Hierarchy Position", 'Object number/ Total nubmer of objects.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Random", "Random 0-1 Value Per Element", 'Creates a random number per object.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Xextent", "X extent", 'The extent of each object on its local X axis.\nValue source is the X Dimension.\nValues between 8-2048 in increments of 8.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Yextent", "Y extent", 'The extent of each object on its local Y axis.\nValue source is the Y Dimension.\nValues between 8-2048 in increments of 8.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Zextent", "Z extent", 'The extent of each object on its local Z axis.\nValue source is the Z Dimension.\nValues between 8-2048 in increments of 8.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Diameterscaledhdr", "HDR - Scaled Bounding Box Diameter", 'The length of the diagonal of the bound box WITH scale taken into calculation.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Diameterscaled", "Scaled Bounding Box Diameter", 'The length of the diagonal of the bound box WITH scale taken into calculation\nValues between 8-2048 in increments of 8.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
 		("None", "None", 'Will use as alpha value 0')
 	]
 	rgb_options = [
-		("PivotPoint", "Pivot Point HDR", 'The origin point of each object.'),
-		("OriginPosition", "Origin Position HDR", 'The bound box center of each object.'),
-		("OriginExtents", "Origin Extents HDR", 'The maximum length of every local axis of each object\nValues source are the object Dimensions.'),
-		("Xaxis", "X Axis", 'X Axis from rotation.'),
-		("Yaxis", "Y Axis", 'Y Axis from rotation.'),
-		("Zaxis", "Z Axis", 'Z Axis from rotation.'),
+		("PivotPoint", "Pivot Point HDR", 'The origin point of each object.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("OriginPosition", "Origin Position HDR", 'The bound box center of each object.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("OriginExtents", "Origin Extents HDR", 'The maximum length of every local axis of each object\nValues source are the object Dimensions.\n\nIf save texture manually, save as OpenEXR, RGBA, Color Depth:Float(Half).'),
+		("Xaxis", "X Axis", 'X Axis from rotation.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8.'),
+		("Yaxis", "Y Axis", 'Y Axis from rotation.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
+		("Zaxis", "Z Axis", 'Z Axis from rotation.\n\nIf save texture manually, save as PNG, RGBA, Color Depth:8'),
 		("None", "None", 'Will use as rgb values 0')
 	]
-	rgb = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="PivotPoint") # Any other way to create multiple of them in loop? And display on the UI.
-	alpha = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Index" )
-	rgb2 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Xaxis" )
-	alpha2 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Xextent")
-	rgb3 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="OriginPosition" )
-	alpha3 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="SelectionOrder")
-	rgb4 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="OriginExtents" )
-	alpha4 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "If HDR save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Hierarchyhdr")
+	rgb = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="PivotPoint") # Any other way to create multiple of them in loop? And display on the UI.
+	alpha = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Index" )
+	rgb2 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Xaxis" )
+	alpha2 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Xextent")
+	rgb3 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="OriginPosition" )
+	alpha3 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="SelectionOrder")
+	rgb4 = bpy.props.EnumProperty( items=rgb_options, name="RGB", description= "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="OriginExtents" )
+	alpha4 = bpy.props.EnumProperty( items=alpha_options, name="Alpha", description = "When you save textures manually,\nIf HDR texture save as OpenEXR, RGBA, Color Depth:Float(Half)\nelse use PNG, RGBA, Color Depth:8\n\nCurrent", default="Hierarchyhdr")
 	
-	automaticindexselect = BoolProperty(name = "Auto UVindex", description = ("Default DISABLED with UVIndex 1.\nCreates a new UVMap.\nIf there are already 8 UVMaps, will rewrite the last one."))
+	automaticindexselect = BoolProperty(name = "Auto UVindex", description = ("Creates a new UVMap.\nIf there are already 8 UVMaps, will rewrite the last one.\nDefault DISABLED with UVIndex 1."))
 	uvindex = IntProperty( name="UVIndex", description="UVindex to store the textures coordinates.\nThe Unreal Engine Pivot Painter Tool 2 shaders use UV index 1 by default.\nWill create enough UV maps to reach target.", default=1,	min=0, max=7)	
 	
 	extraoptions = BoolProperty( name = "Extra options", default = False)
@@ -640,11 +640,11 @@ class UE4_PivotPainterProperties(PropertyGroup):															# create property
 	keeporiginal = BoolProperty( name = "Keep original objects", default = False, description = ("At the start, creates duplicates of the objects to work with.\nThe original objects stay untouched.\nSlow operation."))
 	joinobjects = BoolProperty( name = "Join Objects", default = False, description = ("At the end, creates one single mesh by joining the objects.\nSlow operation."))	
 
-	firstlevel = bpy.props.BoolProperty(name = "1st", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the first level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertex of the boundingbox.")
-	secondlevel = bpy.props.BoolProperty(name = "2nd", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the second level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertex of the boundingbox.")
-	thirdlevel = bpy.props.BoolProperty(name = "3rd", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the third level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertex of the boundingbox.")
-	fourthlevel = bpy.props.BoolProperty(name = "4th", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the fourth level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertex of the boundingbox.")
-	percentagefreedom = bpy.props.FloatProperty( name="BoundBox Percentage", description="Include additional vertices of the BoundBox, with distance from origin point bigger, than the given percentage of max distance.\nCalculates a center point from those vertices. Default 90%  ", default=90,soft_min=50, min=50, max=99.9999, soft_max=99 )
+	firstlevel = bpy.props.BoolProperty(name = "1st", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the first level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertices of the boundingbox.\nWill not work for Y,Z Axes")
+	secondlevel = bpy.props.BoolProperty(name = "2nd", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the second level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertices of the boundingbox.\nWill not work for Y,Z Axes")
+	thirdlevel = bpy.props.BoolProperty(name = "3rd", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the third level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertices of the boundingbox.\nWill not work for Y,Z Axes")
+	fourthlevel = bpy.props.BoolProperty(name = "4th", description = "For Use with objects that have 0 rotation.\nCalculate the X Axis properties from the BoundBox for the fourth level.\nOutcome is not very accurate, but should be sufficient.\nVector from origin point and the furthest vertices of the boundingbox.\nWill not work for Y,Z Axes")
+	percentagefreedom = bpy.props.FloatProperty( name="BoundBox Percentage", description="Finds the distance of the furthest vertex of the boundingbox from the origin point.\nThen includes other vertexes that have distance bigger than the percentage given, and estimates an average point to approximate X axis and extent.\nIn almost all cases the default value is strongly advised.\nDefault 90%", default=90,soft_min=50, min=50, max=99.9999, soft_max=99 )
 
 	mergelevels = BoolProperty( name = "Merge levels", default = False, description = ("Merge levels together.\nLevel = steps from the base.\nFunction can be used alone, by setting textures number to 0.\nThe number of object that will need to join together and their children, control the time merge will take(can be hours)."))
 	customlevel = IntProperty( name = "Custom level", description = "Set the level to be created in the Custom Level property.\nBest results when objects with Custom level are child of object, with level same or lower.", default = 0, min = 0, max = 100, soft_max = 10 )	
@@ -657,7 +657,7 @@ class UE4_PivotPainterProperties(PropertyGroup):															# create property
 	orderstart = IntProperty( name="Order Start Number", description="The number the order count should start.\nDefault 1", default=1, min=1, soft_max=100, max=30000)	
 	dontcount = BoolProperty( name = "Same order number", default = False, description = ("Create the same order number for all selected objects"))	
 
-	savetextures = BoolProperty( name = "Save Textures to folder", default = False, description = ("Will OVERWRITE texture files with the same name\n\nSave textures to the specified folder location"))
+	savetextures = BoolProperty( name = "Save Textures to folder", default = False, description = ("Will always OVERWRITE texture files with the same name\n\nSave textures to the specified folder location"))
 	folderpath = StringProperty( name = "Save location", description="Choose a directory:", default='', maxlen=1024, subtype='DIR_PATH')
 	createnew = BoolProperty( name = "Always create new textures", default = True, description = ("Should it create a new texture or use the first one?"))
 
@@ -794,7 +794,7 @@ class CreateCustomLevelOperator(Operator):																	# Create a custom pro
 class UE4_CreateTexturesOperator(Operator):																	# The button to create the textures
 	bl_label = "Create Textures"
 	bl_idname = "ue4_tools.create_textures"
-	bl_description = "Progress report in system console."
+	bl_description = "Save before use is advised.\n\nProgress report in system console."
     
 	@classmethod
 	def poll(cls, context):
@@ -814,15 +814,11 @@ class UE4_CreateTexturesOperator(Operator):																	# The button to crea
 
 		if pp.savetextures == True:														#Check that save is possible
 			pathok = os.path.exists(bpy.path.abspath(pp.folderpath))
-			subdir = bpy.path.is_subdir(bpy.path.abspath(pp.folderpath),bpy.path.abspath('//'))
-			if pathok == True:
-				if subdir == False:
-					self.report({'ERROR'}, 'Save location exist but is inaccessible as a Relative Path.\nChange Save location or deselect Relative Path.')
-					return {'CANCELLED'}						
-			else:
+			if pathok == False:
 				self.report({'ERROR'}, 'Incorrect Save location ' +str(pp.folderpath))
 				return {'CANCELLED'}	
 
+		warned = False
 		hdrmismatch = 0
 		testSelectionOrder = False
 		testBoundBoxCenter = False
@@ -831,7 +827,7 @@ class UE4_CreateTexturesOperator(Operator):																	# The button to crea
 		for i in range(pp.totaltextures):
 			if rgb[i] != 'None' or alpha[i] != 'None' :
 				_, _, texturergb, texturealpha, hdr, hdra = texturefunction(pp, False, False, i)						# Find if rgb and alpha use Hdr and what the alpha channel is set to store
-				if not ( rgb[i] == 'None' or alpha[i] == 'None' ) :															# In case the rbg or alpha is selected none hdr will stay false and the next test might fail
+				if not ( rgb[i] == 'None' or alpha[i] == 'None' ) :														# In case the rbg or alpha is selected none hdr will stay false and the next test might fail
 					if hdr != hdra : hdrmismatch = i +1 																# If HDR for rgb and alpha selection dont match save the texture number
 				if texturealpha == "SelectionOrder": testSelectionOrder = True											# If alpha is set to selection order will need to check objects
 				if (texturergb == "Xaxis" or texturealpha == "Xextent" or texturealpha == "Xwidth" ) and ( ( pp.firstlevel == True ) or ( pp.secondlevel == True ) or ( pp.thirdlevel == True ) or ( pp.fourthlevel == True ) ):
@@ -859,11 +855,14 @@ class UE4_CreateTexturesOperator(Operator):																	# The button to crea
 				originvector = (vec1 + vec2) /2																			# Vector from origin to bound box center. if origin in the bound box center will give 0 vector
 				originlength = originvector.length																		# size of vector from origin point to the 
 				if originlength < diagonallength * 0.1:																	# The origin needs to be off-center. This is still too close, but should catch problems without bring headaches from couple bad objects.
-					self.report({'ERROR'}, str(obj.name) +" has origin point in the center of BoundBox(or close to)\nTo calculate X axis from BoundBox, origin point needs to be off-center and rotation zero.\nTo disable it, deselect all the boxes under 'Calculate X Axis from BoundBox' in the Extra Options")
-					return {'CANCELLED'}
+#  %i of %i" % (idx, len(bpy.context.selected_objects)
+					self.report({'WARNING'},"Found at least 1 object(%s) with origin point near the center of BoundBox. You can ignore this warning if the object/s is not set up to use Boundbox method. To calculate X axis from BoundBox, origin point needs to be off-center and rotation zero. To disable it, deselect all the boxes under 'Calculate X Axis from BoundBox' in the Extra Options" %(str(obj.name)))
+					warned = True
+					break
 				if obj.rotation_euler[0]!=0 or obj.rotation_euler[1]!=0 or obj.rotation_euler[2]!=0 :
-					self.report({'ERROR'}, str(obj.name) +" has rotation XYZ : "+str(int(round(math.degrees(obj.rotation_euler[0])))) +", "+str(int(round(math.degrees(obj.rotation_euler[1]))))+", " +str(int(round(math.degrees(obj.rotation_euler[2])))) +"\nTo calculate X axis from BoundBox, origin point needs to be off-center and rotation zero.\nTo disable it, uncheck all the boxes under 'Calculate X Axis from BoundBox' in the Extra Options")
-					return {'CANCELLED'}
+					self.report({'WARNING'}, "Found at least 1 object (" + str(obj.name) + ")  with non zero rotation ("+str(int(round(math.degrees(obj.rotation_euler[0])))) +", "+str(int(round(math.degrees(obj.rotation_euler[1]))))+", " +str(int(round(math.degrees(obj.rotation_euler[2])))) +"). To calculate X axis from BoundBox, origin point needs to be off-center and rotation zero. To disable it, uncheck all the boxes under 'Calculate X Axis from BoundBox' in the Extra Options")
+					warned = True
+					break
 		
 		if units.system != 'METRIC' or round(units.scale_length, 2) != 0.01:									# Numerous checks that everything is fine
 			self.report({'ERROR'}, "Scene units must be Metric with a Unit Scale of 0.01!")
@@ -886,7 +885,10 @@ class UE4_CreateTexturesOperator(Operator):																	# The button to crea
 		else:
 			main(context)
 			print('Blender GUI may take a moment to respond')
-			self.report({'INFO'}, "Pivot Painter Done, total time: "+ str(time.time() - t1))
+			if warned == False:
+				self.report({'INFO'}, "Pivot Painter Done, total time: "+ str(time.time() - t1))
+			else:
+				self.report({'INFO'}, "Pivot Painter done with WARNING, total time: "+ str(time.time() - t1) + ". See info area or system console for more info")
 			return {'FINISHED'}
 
 
