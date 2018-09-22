@@ -1,5 +1,4 @@
 # Pivot Painter for Blender
-
 Pivot Painter is a Blender addon to create a 3d model, for use with Pivot Painter Tool's shaders in Unreal Engine 4.
 
 The addon tries to mimic the basic function of the 3dsmaxscript that is based on, while missing many tools that would speed up the creation of a final mesh. As such the resulting mesh and texture, should be fully compatible with the build in material functions of the Pivot Painter Tool 2 shader. Therefore should refer to unreal engine documentation for [Pivot Painter Tool 2.0](https://docs.unrealengine.com/en-us/Engine/Content/Tools/PivotPainter)
@@ -8,13 +7,14 @@ Despite the name the addon does not make use of vertex paint that was used in Pi
 
 The basic functionality of the pivot painter comes from the textures where the info gets stored. One UV layer is set to point each object to the specific pixel with their info.
 
-### Getting Started
+This [video](https://youtu.be/63wU-zAbpNM) shows the motion that can be created.
 
-* Study the ContentExamples.
-* Install the addon.
+## Getting Started
+* Study the Content Examples.
+* Install the add-on.
 * See the example blend file.
 * Read the tooltips of the addon for info.
-* Find what textures the example you want to recreate needs. The names in the addon are the same with the documentation in UE4(filenames differ). The Content Example uses different names.
+* Find what textures the example you want to recreate needs. The names in the add-on are the same with the documentation in UE4(filenames differ). The Content Example uses different names.
 * Set the blender scene units on centimeters.
 * Create the mesh in separate parts.
 * Depending on the texture set origin point, parent, selection order.
@@ -24,8 +24,9 @@ The basic functionality of the pivot painter comes from the textures where the i
 * For the textures set filter Nearest. If the texture is png also set compression VectorDisplacementMap and disable sRGB. (See UE4 documentation link above)
 * Combine textures, materials and mesh.
 
-### Considerations
+For more detail instructions and examples see [here](https://drive.google.com/drive/folders/1OQ_DwbMsR2QZnrKk-4144nJPH4av3LB-?usp=sharing).
 
+## Considerations
 The tooltips of the addon contain important information than can help avoid problems. It is easy to miss them, keep an eye on them.
 
 The addon to work, needs all the parts of the mesh to be separate objects, and necessary settings configured depending of the texture selection.
@@ -39,20 +40,13 @@ Because the tool requires separate objects to work, in complex meshes the number
 
 It is not possible to recreate exactly the same, some of the examples from pivot painter 1. Pivot painter tool 1 provide custom alpha data, which this addon does not create. 
 
-Lastly, the author does not use this addon. Which means that there is no chance to know a problem, if you don't point it. While the results have been tested, simple bugs that hinder the use of the addon were in place, and almost certainly more bugs still exist.
 
-### Examples
-
-A .blend file is included with examples for Pivot Painter already configured in different scenes.
-The examples show how to recreate the basic demos at content examples of UE4.
-The zip file contain an UE4 project with examples from both versions of pivot painter tool.
-Video with the result from the UE4 project [here](https://youtu.be/63wU-zAbpNM).
-
-## Version
-Currently the next update planned is for blender 2.80, no sooner than the release of the api for the beta version.
+## Changelog
+version 1.0
+- bumped version number, with the creation of the guide, this add-on is now complete.
 
 version 0.9.2
-- fixed a bug that prevented the automatic save of the textures to folder expect the subfolder of the current location of the blend file.
+- fixed a bug that prevented the automatic save of the textures to folder, expect a subfolder from the location of the blend file.
 - fixed a bug that prevented the selection of the separate levels when calculating the X axis from boundbox.
 - improved tooltips for better visibility.
 - add little more info in the readme.
@@ -93,4 +87,3 @@ This project is Licensed under the EUPL, see the [LICENSE.txt](LICENSE.txt) file
 ## Acknowledgment
 
 * This addon is based on the 3dsMaxScript Pivot Painter version 2.0 written by Jonathan Lindquist at Epic Games.
-
