@@ -15,8 +15,8 @@ bl_info = {
     "name": "Pivot Painter",
     "author": "George Vogiatzis (Gvgeo)",
     "version": (1, 0),
-    "blender": (2, 79, 0),
-    "location": "View3D > Tool Shelf > Unreal Tools",
+    "blender": (2, 80, 0),
+    "location": "View3D > UI > Unreal Tools",
     "description": "Tools to create 3d model for Unreal Engine 4, that make use of the Pivot Painter Tool's material functions",
     "warning": "Untested",
     "wiki_url": "https://github.com/Gvgeo/Pivot-Painter-for-Blender",
@@ -183,12 +183,12 @@ def createUVMap(size,props): 																				# Create uvmap with point coord
 	for idx, obj in enumerate(bpy.context.selected_objects):
 		progress("Create UV Map for object %i of %i" % (idx, len(bpy.context.selected_objects)))			# time is affected from vertex count mainly
 		if props.automaticindexselect == True:
-			obj.data.uv_textures.new(name = "PivotPainterMap") # it will not create if already 8 uvmap(max)
-			layernumber = len(obj.data.uv_textures)-1 # will use the last layer
+			obj.data.uv_layers.new(name = "PivotPainterMap") # it will not create if already 8 uvmap(max)
+			layernumber = len(obj.data.uv_layers)-1 # will use the last layer
 		else:
 			layernumber = props.uvindex
 			while len(obj.data.uv_layers) <= layernumber:			# Create enough layers to reach target
-				obj.data.uv_textures.new(name = "PivotPainterMap") 
+				obj.data.uv_layers.new(name = "PivotPainterMap") 
 	
 		x = idx%size[0]/size[0]+1/size[0] /2							# x and y, position of the object on the uv
 		y = 1 - (floor(idx/size[0])/size[1]+1/size[1]/2) 				# y position inverted for consistency with UE4 Pivot Painter Shaders
@@ -896,7 +896,7 @@ class UE4_PivotPainterPanel(Panel):																			# THe panel in the UI
 	bl_idname = "ue4_pivot_painter_panel"
 	bl_label = "Pivot Painter"		
 	bl_space_type = 'VIEW_3D'
-	bl_region_type = 'TOOLS'
+	bl_region_type = 'UI'
 	bl_category = "Unreal Tools"
 
   
