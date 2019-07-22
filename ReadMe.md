@@ -43,6 +43,7 @@ It is not possible to recreate exactly the same, some of the examples from pivot
 # 2.80 
  Randomly crashes with undo/redo. The crash is so rare that, is impossible to pinpoint the problem.
  To make sure you are aware of the problem, the version inside the addon is left unchanged.
+ 
  Simply change 79 to 80 in line 30 of the PivotPainterTool280.py file.
  And make sure you save before using this addon (and maybe after that).
  
