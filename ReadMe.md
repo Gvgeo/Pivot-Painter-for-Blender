@@ -40,8 +40,18 @@ Because the tool requires separate objects to work, in complex meshes the number
 
 It is not possible to recreate exactly the same, some of the examples from pivot painter 1. Pivot painter tool 1 provide custom alpha data, which this addon does not create. 
 
-
+# 2.80 
+ Randomly crashes with undo/redo. The crash is so rare that, is impossible to pinpoint the problem.
+ To make sure you are aware of the problem, the version inside the addon is left unchanged.
+ Simply change 79 to 80 in line 30 of the PivotPainterTool280.py file.
+ And make sure you save before using this addon (and maybe after that).
+ 
 ## Changelog
+version 1.1
+- add support for 2.80. Has random CRASHES.
+- removed unnecessary options (merge, keep original, merge levels)
+- correct license to GPL (was the effective one based on the blender license)
+
 version 1.0
 - bumped version number, with the creation of the guide, this add-on is now complete.
 
@@ -82,7 +92,7 @@ version 0.7
 
 ## License
 
-This project is Licensed under the EUPL, see the [LICENSE.txt](LICENSE.txt) file for details.
+This project is Licensed under the GPL v3.0, see the [LICENSE.txt](LICENSE.txt) file for details.
 
 ## Acknowledgment
 
