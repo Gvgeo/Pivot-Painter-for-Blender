@@ -39,17 +39,15 @@ The Save Textures to folder option will always overwrite if an other texture fil
 Because the tool requires separate objects to work, in complex meshes the number of meshes can heavily impact the performance of the Blender UI.
 
 It is not possible to recreate exactly the same, some of the examples from pivot painter 1. Pivot painter tool 1 provide custom alpha data, which this addon does not create. 
-
-# 2.80 
- Randomly crashes with undo/redo. The crash is so rare that, is impossible to pinpoint the problem.
- To make sure you are aware of the problem, the version inside the addon is left unchanged.
- 
- Simply change 79 to 80 in line 30 of the PivotPainterTool280.py file.
- And make sure you save before using this addon (and maybe after that).
  
 ## Changelog
+
+version 1.1.1
+- removed warnings (Crashes with undo/redo of 2.80 rc2 have been fixed in the final release of 2.80)
+- updated the version in the addon to run without modification.
+
 version 1.1
-- add support for 2.80. Has random CRASHES.
+- add support for 2.80. Had random crashes.
 - removed unnecessary options (merge, keep original, merge levels)
 - correct license to GPL (was the effective one based on the blender license)
 
