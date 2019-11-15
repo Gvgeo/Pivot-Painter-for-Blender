@@ -1,30 +1,25 @@
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
+# 
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-#
+# 
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software Foundation,
-# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-#
-# The Original Code is Copyright (C) 2013 Blender Foundation.
-# All rights reserved.
-#
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# 
 
 bl_info = {
     "name": "Pivot Painter",
     "author": "George Vogiatzis (Gvgeo)",
-    "version": (1, 1, 1),
+    "version": (1, 1, 3),
     "blender": (2, 80, 0),
     "location": "View3D > Tool Shelf > Unreal Tools",
     "description": "Tools to create 3d model for Unreal Engine 4, that make use of the Pivot Painter Tool's material functions",
-    "warning": "random hard CRASH with undo/redo.",
     "wiki_url": "https://github.com/Gvgeo/Pivot-Painter-for-Blender",
     "category": "Unreal Tools",
     }
@@ -181,10 +176,10 @@ def findalphafunction(texturealpha, hdr):																	# Select the alpha fun
 		alphafunction = xextent
 		hdr = True	
 	elif texturealpha == 'Ydepth' :
-		alphafunction = customorder
+		alphafunction = yextent
 		hdr = True	
 	elif texturealpha == 'Zheight' :
-		alphafunction = customorder
+		alphafunction = zextent
 		hdr = True	
 	else: alphafunction = alphanonefuction
 	return alphafunction, hdr
@@ -363,7 +358,7 @@ def originArray(pp, obj, counter, size, pixels, hdr):														# Find the ce
 	g = center[1]
 	b = center[2]
 	rgbvalues = [ r, g, b, ]
-	return rgbvalues																		# TO DO(Canceled, it cannot used with the current shaders): use 3cursor move technic so I can set center type, mass or bb or surface center.
+	return rgbvalues																		# TO DO(Canceled, it cannot be used with the current shaders): use 3cursor move technic so I can set center type, mass or bb or surface center.
 
 
 def indexarray(pp, obj, counter, size, pixels, hdr):														# Index of the parent. (Used to inherit properties, like rotation position.)
@@ -485,14 +480,16 @@ def xextent(pp, obj, counter, size, pixels, hdr):															# X Extent, the 
 
 def yextent(pp, obj, counter, size, pixels, hdr):															# Y Extent, the length of the object on the local y axis
 	a = obj.dimensions[1]/8 			# "Dimensions" property, change with the scale -> There is no need to apply scale, nor does it effect it.
-	a = np.clip(a,1,256)
-	a = a /256
+	if hdr == False :
+		a = np.clip(a,1,256)
+		a = a /256
 	return a
 
 def zextent(pp, obj, counter, size, pixels, hdr):															# Z Extent, the length of the object on the local z axis
 	a = obj.dimensions[2]/8 			# "Dimensions" property, change with the scale -> There is no need to apply scale, nor does it effect it.
-	a = np.clip(a,1,256)
-	a = a /256
+	if hdr == False :
+		a = np.clip(a,1,256)
+		a = a /256
 	return a
 
 
@@ -558,7 +555,7 @@ class UE4_PivotPainterProperties(PropertyGroup):															# create property
 
 
 def main(context):																							# The start of all the problems
-	print('=============================================================================================================================================================================================')
+	print('===================')
 	print('Pivot Painter start')
 	tt = time.time()
 	pp = context.scene.pivot_painter 
@@ -610,7 +607,7 @@ class PPB_OT_CreateSelectOrder(Operator):																	# Create a custom prop
 	orderarray = []											# Array with selected objects in order of selection
 	prevlen = 0
 	def update(self, context):								# Create the orderarray
-		curlen = len(context.selected_objects)				# Store len to avoid calculation twice (is this bad?)
+		curlen = len(context.selected_objects)
 		if curlen > self.prevlen:							# Selected more objects
 			for obj in context.selected_objects:
 				if obj not in self.orderarray:				# if obj are missing add to orderarray
