@@ -42,6 +42,11 @@ It is not possible to recreate exactly the same, some of the examples from pivot
  
 ## Changelog
 
+version 1.1.2
+- fix Ydepth and Zheight functions.
+- correct license message.
+- remove warning from inside blender.
+
 version 1.1.1
 - removed warnings (Crashes with undo/redo of 2.80 rc2 have been fixed in the final release of 2.80)
 - updated the version in the addon to run without modification.
