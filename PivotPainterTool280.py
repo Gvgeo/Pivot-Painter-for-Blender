@@ -16,7 +16,7 @@
 bl_info = {
     "name": "Pivot Painter",
     "author": "George Vogiatzis (Gvgeo)",
-    "version": (1, 1, 3),
+    "version": (1, 1, 2),
     "blender": (2, 80, 0),
     "location": "View3D > Tool Shelf > Unreal Tools",
     "description": "Tools to create 3d model for Unreal Engine 4, that make use of the Pivot Painter Tool's material functions",
